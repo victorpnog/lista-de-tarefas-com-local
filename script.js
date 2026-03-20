@@ -1,7 +1,6 @@
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
 
-// carrega ao abrir a página
 document.addEventListener("DOMContentLoaded", loadTasks);
 
 function getTasks() {
@@ -17,31 +16,25 @@ function loadTasks() {
     taskList.innerHTML = "";
 
     tasks.forEach((task, index) => {
-        createTaskElement(task, index);
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+      ${task}
+      <button onclick="removeTask(${index})">X</button>
+    `;
+
+        taskList.appendChild(li);
     });
-}
-
-// cria item visual da tarefa
-function createTaskElement(task, index) {
-    const li = document.createElement("li");
-
-    li.innerHTML = `
-    ${task}
-    <button onclick="removeTask(${index})">X</button>
-  `;
-
-    taskList.appendChild(li);
 }
 
 function addTask() {
     const task = taskInput.value.trim();
-
-    if (task === "") return;
+    if (!task) return;
 
     const tasks = getTasks();
     tasks.push(task);
-    saveTasks(tasks);
 
+    saveTasks(tasks);
     taskInput.value = "";
     loadTasks();
 }
@@ -49,6 +42,7 @@ function addTask() {
 function removeTask(index) {
     const tasks = getTasks();
     tasks.splice(index, 1);
+
     saveTasks(tasks);
     loadTasks();
 }
