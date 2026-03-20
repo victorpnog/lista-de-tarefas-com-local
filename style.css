@@ -26,10 +26,12 @@ h1 {
 .input-area {
     display: flex;
     gap: 10px;
+    /* espaçamento automático entre input e botão */
 }
 
 input {
     flex: 1;
+    /* faz o input ocupar todo espaço disponível */
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ddd;
